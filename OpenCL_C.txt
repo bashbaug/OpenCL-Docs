@@ -4616,7 +4616,8 @@ gentype half_cos(gentype x)
       _x_ is an angle in radians, and must be in the range [-2^16^, +2^16^].
 |[source,c]
 ----
-gentype half_divide(gentype x, gentype y)
+gentype half_divide(
+    gentype x, gentype y)
 ----
     | Compute _x_ / _y_.
 |[source,c]
@@ -4691,7 +4692,8 @@ gentype native_cos(gentype x)
       The maximum error is implementation-defined.
 |[source,c]
 ----
-gentype native_divide(gentype x, gentype y)
+gentype native_divide(
+    gentype x, gentype y)
 ----
     | Compute _x_ / _y_ over an implementation-defined range.
       The maximum error is implementation-defined.
@@ -5027,74 +5029,133 @@ all arguments and the return type unless otherwise specified.
 
 [[table-builtin-functions]]
 .Scalar and Vector Integer Argument Built-in Functions
-[cols=",",]
+[cols="a,",]
 |====
 | *Function* | *Description*
-| ugentype *abs*(gentype _x_)
+|[source,c]
+----
+ugentype abs(gentype x)
+----
     | Returns \|x\|.
-| ugentype *abs_diff*(gentype _x_, gentype _y_)
+|[source,c]
+----
+ugentype abs_diff(gentype x, gentype y)
+----
     | Returns \|x - y\| without modulo overflow.
-| gentype *add_sat*(gentype _x_, gentype _y_)
+|[source,c]
+----
+gentype add_sat(gentype x, gentype y)
+----
     | Returns _x_ + _y_ and saturates the result.
-| gentype *hadd*(gentype _x_, gentype _y_)
+|[source,c]
+----
+gentype hadd(gentype x, gentype y)
+----
     | Returns (_x_ + _y_) >> 1.
       The intermediate sum does not modulo overflow.
-| gentype *rhadd*(gentype _x_, gentype _y_)^32^
+|[source,c]
+----
+gentype rhadd(gentype x, gentype y)
+----
     | Returns (_x_ + _y_ + 1) >> 1.
-      The intermediate sum does not modulo overflow.
-| gentype *clamp*(gentype _x_, gentype _minval_, gentype _maxval_) +
-  gentype *clamp*(gentype _x_, sgentype _minval_, sgentype _maxval_)
+      The intermediate sum does not modulo overflow.^32^
+|[source,c]
+----
+gentype clamp(
+    gentype x, gentype minval, gentype maxval)
+gentype clamp(
+    gentype x, sgentype minval, sgentype maxval)
+----
     | Returns *min*(*max*(_x_, _minval_), _maxval_).
       Results are undefined if _minval_ > _maxval_.
-| gentype *clz*(gentype _x_)
+|[source,c]
+----
+gentype clz(gentype x)
+----
     | Returns the number of leading 0-bits in _x_, starting at the most
       significant bit position.
       If _x_ is 0, returns the size in bits of the type of _x_ or component
       type of _x_, if _x_ is a vector.
-| gentype *ctz*(gentype _x_)
+|[source,c]
+----
+gentype ctz(gentype x)
+----
     | Returns the count of trailing 0-bits in _x_.
       If _x_ is 0, returns the size in bits of the type of _x_ or component
       type of _x_, if _x_ is a vector.
-| gentype *mad_hi*(gentype _a_, gentype _b_, gentype _c_)
+|[source,c]
+----
+gentype mad_hi(gentype a, gentype b, gentype c)
+----
     | Returns *mul_hi*(_a_, _b_) + _c_.
-| gentype *mad_sat*(gentype _a_, gentype _b_, gentype _c_)
+|[source,c]
+----
+gentype mad_sat(gentype a, gentype b, gentype c)
+----
     | Returns _a_ * _b_ + _c_ and saturates the result.
-| gentype *max*(gentype _x_, gentype _y_) +
-  gentype *max*(gentype _x_, sgentype _y_)
+|[source,c]
+----
+gentype max(gentype x, gentype y)
+gentype max(gentype x, sgentype y)
+----
     | Returns _y_ if _x_ < _y_, otherwise it returns _x_.
-| gentype *min*(gentype _x_, gentype _y_) +
-  gentype *min*(gentype _x_, sgentype _y_)
+|[source,c]
+----
+gentype min(gentype x, gentype y)
+gentype min(gentype x, sgentype y)
+----
     | Returns _y_ if _y_ < _x_, otherwise it returns _x_.
-| gentype *mul_hi*(gentype _x_, gentype _y_)
+|[source,c]
+----
+gentype mul_hi(gentype x, gentype y)
+----
     | Computes _x_ * _y_ and returns the high half of the product of _x_ and
       _y_.
-| gentype *rotate*(gentype _v_, gentype _i_)
+|[source,c]
+----
+gentype rotate(gentype v, gentype i)
+----
     | For each element in _v_, the bits are shifted left by the number of
       bits given by the corresponding element in _i_ (subject to the usual
       <<operators-shift,shift modulo rules>>).
       Bits shifted off the left side of the element are shifted back in from
       the right.
-| gentype *sub_sat*(gentype _x_, gentype _y_)
+|[source,c]
+----
+gentype sub_sat(gentype x, gentype y)
+----
     | Returns _x_ - _y_ and saturates the result.
-| short *upsample*(char _hi_, uchar _lo_) +
-  ushort *upsample*(uchar _hi_, uchar _lo_) +
-  short__n__ *upsample*(char__n__ _hi_, uchar__n__ _lo_) +
-  ushort__n__ *upsample*(uchar__n__ _hi_, uchar__n__ _lo_)
+|[source,c]
+----
+short upsample(char hi, uchar lo)
+ushort upsample(uchar hi, uchar lo)
+shortn upsample(charn hi, ucharn lo)
+ushortn upsample(ucharn hi, ucharn lo)
+----
     | _result_[i] = ((short)_hi_[i] << 8) \| _lo_[i] +
       _result_[i] = ((ushort)_hi_[i] << 8) \| _lo_[i] +
-| int *upsample*(short _hi_, ushort _lo_) +
-  uint *upsample*(ushort _hi_, ushort _lo_) +
-  int__n__ *upsample*(short__n__ _hi_, ushort__n__ _lo_) +
-  uint__n__ *upsample*(ushort__n__ _hi_, ushort__n__ _lo_)
+|[source,c]
+----
+int upsample(short hi, ushort lo)
+uint upsample(ushort hi, ushort lo)
+intn upsample(shortn hi, ushortn lo)
+uintn upsample(ushortn hi, ushortn lo)
+----
     | _result_[i] = ((int)_hi_[i] << 16) \| _lo_[i] +
       _result_[i] = ((uint)_hi_[i] << 16) \| _lo_[i] +
-| long *upsample*(int _hi_, uint _lo_) +
-  ulong *upsample*(uint _hi_, uint _lo_) +
-  long__n__ *upsample*(int__n__ _hi_, uint__n__ _lo_) +
-  ulong__n__ *upsample*(uint__n__ _hi_, uint__n__ _lo_)
+|[source,c]
+----
+long upsample(int hi, uint lo)
+ulong upsample(uint hi, uint lo)
+longn upsample(intn hi, uintn lo)
+ulongn upsample(uintn hi, uintn lo)
+----
     | _result_[i] = ((long)_hi_[i] << 32) \| _lo_[i] +
       _result_[i] = ((ulong)_hi_[i] << 32) \| _lo_[i]
-| gentype *popcount*(gentype _x_)
+|[source,c]
+----
+gentype popcount(gentype x)
+----
     | Returns the number of non-zero bits in _x_.
 |====
 
@@ -5112,15 +5173,22 @@ take `int`, `int2`, `int3`, `int4`, `int8`, `int16`, `uint`, `uint2`,
 
 [[table-builtin-fast-integer]]
 .Fast Integer Built-in Functions
-[cols=",",]
+[cols="a,",]
 |====
 | *Function* | *Description*
-| gentype *mad24*(gentype _x_, gentype _y_, gentype z)
+|[source,c]
+----
+gentype mad24(
+    gentype x, gentype y, gentype z)
+----
     | Multipy two 24-bit integer values _x_ and _y_ and add the 32-bit
       integer result to the 32-bit integer _z_.
       Refer to definition of *mul24* to see how the 24-bit integer
       multiplication is performed.
-| gentype *mul24*(gentype _x_, gentype _y_)
+|[source,c]
+----
+gentype mul24(gentype x, gentype y)
+----
     | Multiply two 24-bit integer values _x_ and _y_.
       _x_ and _y_ are 32-bit integers but only the low 24-bits are used to
       perform the multiplication.
