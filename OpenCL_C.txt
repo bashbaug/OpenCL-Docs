@@ -3936,14 +3936,20 @@ identifier of each work-item when this kernel is being executed on a device.
 
 [[table-work-item-functions]]
 .Work-Item Functions Table
-[cols=",",]
+[cols="a,",]
 |====
 | *Function* | *Description*
-| uint *get_work_dim*()
+|[source,c]
+----
+uint get_work_dim()
+----
     | Returns the number of dimensions in use.
       This is the value given to the _work_dim_ argument specified in
       *clEnqueueNDRangeKernel*.
-| size_t *get_global_size*(uint _dimindx_)
+|[source,c]
+----
+size_t get_global_size(uint dimindx)
+----
     | Returns the number of global work-items specified for dimension
       identified by _dimindx_.
       This value is given by the _global_work_size_ argument to
@@ -3951,7 +3957,10 @@ identifier of each work-item when this kernel is being executed on a device.
 
       Valid values of _dimindx_ are 0 to *get_work_dim*() - 1.
       For other values of _dimindx_, *get_global_size*() returns 1.
-| size_t *get_global_id*(uint _dimindx_)
+|[source,c]
+----
+size_t get_global_id(uint dimindx)
+----
     | Returns the unique global work-item ID value for dimension identified
       by _dimindx_.
       The global work-item ID specifies the work-item ID based on the number
@@ -3959,7 +3968,10 @@ identifier of each work-item when this kernel is being executed on a device.
 
       Valid values of _dimindx_ are 0 to *get_work_dim*() - 1.
       For other values of _dimindx_, *get_global_id*() returns 0.
-| size_t *get_local_size*(uint _dimindx_)
+|[source,c]
+----
+size_t get_local_size(uint dimindx)
+----
     | Returns the number of local work-items specified in dimension
       identified by _dimindx_.
       This value is at most the value given by the _local_work_size_
@@ -3972,8 +3984,11 @@ identifier of each work-item when this kernel is being executed on a device.
 
       Valid values of _dimindx_ are 0 to *get_work_dim*() - 1.
       For other values of _dimindx_, *get_local_size*() returns 1.
-| size_t *get_enqueued_local_size*(
-      uint _dimindx_)
+|[source,c]
+----
+size_t get_enqueued_local_size(
+    uint dimindx)
+----
     | Returns the same value as that returned by *get_local_size*(_dimindx_)
       if the kernel is executed with a uniform work-group size.
 
@@ -3990,31 +4005,46 @@ identifier of each work-item when this kernel is being executed on a device.
 
       Valid values of _dimindx_ are 0 to *get_work_dim*() - 1.
       For other values of _dimindx_, *get_enqueued_local_size*() returns 1.
-| size_t *get_local_id*(uint _dimindx_)
+|[source,c]
+----
+size_t get_local_id(uint dimindx)
+----
     | Returns the unique local work-item ID, i.e. a work-item within a
       specific work-group for dimension identified by _dimindx_.
 
       Valid values of _dimindx_ are 0 to *get_work_dim*() - 1.
       For other values of _dimindx_, *get_local_id*() returns 0.
-| size_t *get_num_groups*(uint _dimindx_)
+|[source,c]
+----
+size_t get_num_groups(uint dimindx)
+----
     | Returns the number of work-groups that will execute a kernel for
       dimension identified by _dimindx_.
 
       Valid values of _dimindx_ are 0 to *get_work_dim*() - 1.
       For other values of _dimindx_, *get_num_groups*() returns 1.
-| size_t *get_group_id*(uint _dimindx_)
+|[source,c]
+----
+size_t get_group_id(uint dimindx)
+----
     | *get_group_id* returns the work-group ID which is a number from 0 ..
       *get_num_groups*(_dimindx_) - 1.
 
       Valid values of _dimindx_ are 0 to *get_work_dim*() - 1.
       For other values, *get_group_id*() returns 0.
-| size_t *get_global_offset*(uint _dimindx_)
+|[source,c]
+----
+size_t get_global_offset(uint dimindx)
+----
     | *get_global_offset* returns the offset values specified in
       _global_work_offset_ argument to *clEnqueueNDRangeKernel*.
 
       Valid values of _dimindx_ are 0 to *get_work_dim*() - 1.
       For other values, *get_global_offset*() returns 0.
-| size_t *get_global_linear_id*()
+|[source,c]
+----
+size_t get_global_linear_id()
+----
     | Returns the work-items 1-dimensional global ID.
 
       For 1D work-groups, it is computed as *get_global_id*(0) -
@@ -4028,7 +4058,10 @@ identifier of each work-item when this kernel is being executed on a device.
       *get_global_offset*(2)) * *get_global_size*(1) * *get_global_size*(0))
       + ((*get_global_id*(1) - *get_global_offset*(1)) * *get_global_size*
       (0)) + (*get_global_id*(0) - *get_global_offset*(0)).
-| size_t *get_local_linear_id*()
+|[source,c]
+----
+size_t get_local_linear_id()
+----
     | Returns the work-items 1-dimensional local ID.
 
       For 1D work-groups, it is the same value as
@@ -4086,181 +4119,350 @@ all arguments and the return type, unless otherwise specified.
 
 [[table-builtin-math]]
 .Scalar and Vector Argument Built-in Math Function Table
-[cols=",",]
+[cols="a,",]
 |====
 | *Function* |*Description*
-| gentype *acos*(gentype)
+|[source,c]
+----
+gentype acos(gentype)
+----
     | Arc cosine function. Returns an angle in radians.
-| gentype *acosh*(gentype)
+|[source,c]
+----
+gentype acosh(gentype)
+----
     | Inverse hyperbolic cosine. Returns an angle in radians.
-| gentype *acospi*(gentype _x_)
+|[source,c]
+----
+gentype acospi(gentype x)
+----
     | Compute *acos*(_x_) / {pi}.
-| gentype *asin*(gentype)
+|[source,c]
+----
+gentype asin(gentype)
+----
     | Arc sine function. Returns an angle in radians.
-| gentype *asinh*(gentype)
+|[source,c]
+----
+gentype asinh(gentype)
+----
     | Inverse hyperbolic sine. Returns an angle in radians.
-| gentype *asinpi*(gentype _x_)
+|[source,c]
+----
+gentype asinpi(gentype x)
+----
     | Compute *asin*(_x_) / {pi}.
-| gentype *atan*(gentype _y_over_x_)
+|[source,c]
+----
+gentype atan(gentype)
+----
     | Arc tangent function. Returns an angle in radians.
-| gentype *atan2*(gentype _y_, gentype _x_)
+|[source,c]
+----
+gentype atan2(gentype y, gentype x)
+----
     | Arc tangent of _y_ / _x_. Returns an angle in radians.
-| gentype *atanh*(gentype)
+|[source,c]
+----
+gentype atanh(gentype)
+----
     | Hyperbolic arc tangent. Returns an angle in radians.
-| gentype *atanpi*(gentype _x_)
+|[source,c]
+----
+gentype atanpi(gentype x)
+----
     | Compute *atan*(_x_) / {pi}.
-| gentype *atan2pi*(gentype _y_, gentype _x_)
+|[source,c]
+----
+gentype atan2pi(gentype y, gentype x)
+----
     | Compute *atan2*(_y_, _x_) / {pi}.
-| gentype *cbrt*(gentype)
+|[source,c]
+----
+gentype cbrt(gentype)
+----
     | Compute cube-root.
-| gentype *ceil*(gentype)
+|[source,c]
+----
+gentype ceil(gentype)
+----
     | Round to integral value using the round to positive infinity rounding
       mode.
-| gentype *copysign*(gentype _x_, gentype _y_)
+|[source,c]
+----
+gentype copysign(gentype x, gentype y)
+----
     | Returns _x_ with its sign changed to match the sign of _y_.
-| gentype *cos*(gentype _x_)
+|[source,c]
+----
+gentype cos(gentype x)
+----
     | Compute cosine, where _x_ is an angle in radians.
-| gentype *cosh*(gentype _x_)
+|[source,c]
+----
+gentype cosh(gentype x)
+----
     | Compute hyperbolic cosine, where _x_ is an angle in radians.
-| gentype *cospi*(gentype _x_)
+|[source,c]
+----
+gentype cospi(gentype x)
+----
     | Compute *cos*({pi} _x_).
-| gentype *erfc*(gentype)
+|[source,c]
+----
+gentype erfc(gentype)
+----
     | Complementary error function.
-| gentype *erf*(gentype)
+|[source,c]
+----
+gentype erf(gentype)
+----
     | Error function encountered in integrating the
       http://mathworld.wolfram.com/NormalDistribution.html[_normal
       distribution_].
-| gentype *exp*(gentype _x_)
+|[source,c]
+----
+gentype exp(gentype x)
+----
     | Compute the base-_e_ exponential of _x_.
-| gentype *exp2*(gentype)
+|[source,c]
+----
+gentype exp2(gentype)
+----
     | Exponential base 2 function.
-| gentype *exp10*(gentype)
+|[source,c]
+----
+gentype exp10(gentype)
+----
     | Exponential base 10 function.
-| gentype *expm1*(gentype _x_)
+|[source,c]
+----
+gentype expm1(gentype x)
+----
     | Compute _e^x^_ - 1.0.
-| gentype *fabs*(gentype)
+|[source,c]
+----
+gentype fabs(gentype)
+----
     | Compute absolute value of a floating-point number.
-| gentype *fdim*(gentype _x_, gentype _y_)
+|[source,c]
+----
+gentype fdim(gentype x, gentype y)
+----
     | _x_ - _y_ if _x_ > _y_, +0 if _x_ is less than or equal to y.
-| gentype *floor*(gentype)
+|[source,c]
+----
+gentype floor(gentype)
+----
     | Round to integral value using the round to negative infinity rounding
       mode.
-| gentype *fma*(gentype _a_, gentype _b_, gentype _c_)
+|[source,c]
+----
+gentype fma(
+    gentype a, gentype b, gentype c)
+----
     | Returns the correctly rounded floating-point representation of the sum
       of _c_ with the infinitely precise product of _a_ and _b_.
       Rounding of intermediate products shall not occur.
       Edge case behavior is per the IEEE 754-2008 standard.
-| gentype *fmax*(gentype _x_, gentype _y_) +
-  gentypef *fmax*(gentypef _x_, float _y_) +
-  gentyped *fmax*(gentyped _x_, double _y_)
+|[source,c]
+----
+gentype fmax(gentype x, gentype y)
+gentypef fmax(gentypef x, float y)
+gentyped fmax(gentyped x, double y)
+----
     | Returns _y_ if _x_ < _y_, otherwise it returns _x_.
       If one argument is a NaN, *fmax*() returns the other argument.
       If both arguments are NaNs, *fmax*() returns a NaN.
-| gentype *fmin*^29^(gentype _x_, gentype _y_) +
-  gentypef *fmin*(gentypef _x_, float _y_) +
-  gentyped *fmin*(gentyped _x_, double _y_)
+|[source,c]
+----
+gentype fmin(gentype x, gentype y)
+gentypef fmin(gentypef x, float y)
+gentyped fmin(gentyped x, double y)
+----
     | Returns _y_ if _y_ < _x_, otherwise it returns _x_.
       If one argument is a NaN, *fmin*() returns the other argument.
-      If both arguments are NaNs, *fmin*() returns a NaN.
-| gentype *fmod*(gentype _x_, gentype _y_)
+      If both arguments are NaNs, *fmin*() returns a NaN.^29^
+|[source,c]
+----
+gentype fmod(gentype x, gentype y)
+----
     | Modulus.
       Returns _x_ - _y_ * *trunc*(_x_/_y_).
-| gentype *fract*(gentype _x_, gentype _*iptr_)^30^
+|[source,c]
+----
+gentype fract(gentype x, gentype *iptr)
+----
     | Returns *fmin*(_x_ - *floor*(_x_), `0x1.fffffep-1f`).
-      *floor*(x) is returned in _iptr_.
-| float__n__ **frexp**(float__n__ _x_, int__n__ *exp) +
-  float **frexp**(float _x_, int *exp)
+      *floor*(x) is returned in _iptr_.^30^
+|[source,c]
+----
+floatn frexp(floatn x, intn *exp)
+float frexp(float x, int *exp)
+----
     | Extract mantissa and exponent from _x_.
       For each component the mantissa returned is a `float` with magnitude
       in the interval [1/2, 1) or 0.
       Each component of _x_ equals mantissa returned * 2__^exp^__.
-| double__n__ **frexp**(double__n__ _x_, int__n__ *exp) +
-  double **frexp**(double _x_, int *exp)
+|[source,c]
+----
+doublen frexp(doublen x, intn *exp)
+double frexp(double x, int *exp)
+----
     | Extract mantissa and exponent from _x_.
       For each component the mantissa returned is a `float` with magnitude
       in the interval [1/2, 1) or 0.
       Each component of _x_ equals mantissa returned * 2__^exp^__.
-| gentype *hypot*(gentype _x_, gentype _y_)
-    | Compute the value of the square root of __x__^2^+ __y__^2^ without
+|[source,c]
+----
+gentype hypot(gentype x, gentype y)
+----
+    | Compute the value of the square root of __x__^2^ + __y__^2^ without
       undue overflow or underflow.
-| int__n__ *ilogb*(float__n__ _x_) +
-  int *ilogb*(float _x_) +
-  int__n__ *ilogb*(double__n__ _x_) +
-  int *ilogb*(double _x_)
+|[source,c]
+----
+intn ilogb(floatn x)
+int ilogb(float x)
+
+intn ilogb(doublen x)
+int ilogb(double x)
+----
     | Return the exponent as an integer value.
-| float__n__ *ldexp*(float__n__ _x_, int__n__ _k_) +
-  float__n__ *ldexp*(float__n__ _x_, int _k_) +
-  float *ldexp*(float _x_, int _k_) +
-  double__n__ *ldexp*(double__n__ _x_, int__n__ _k_) +
-  double__n__ *ldexp*(double__n__ _x_, int _k_) +
-  double *ldexp*(double _x_, int _k_)
+|[source,c]
+----
+floatn ldexp(floatn x, intn k)
+floatn ldexp(floatn x, int k)
+float ldexp(float x, int k)
+
+doublen ldexp(doublen x, intn k)
+doublen ldexp(doublen x, int k)
+double ldexp(double x, int k)
+----
     | Multiply _x_ by 2 to the power _k_.
-| gentype *lgamma*(gentype _x_) +
-  float__n__ **lgamma_r**(float__n__ _x_, int__n__ *_signp_) +
-  float **lgamma_r**(float _x_, int *_signp_) +
-  double__n__ **lgamma_r**(double__n__ _x_, int__n__ *_signp_) +
-  double **lgamma_r**(double _x_, int *_signp_)
+|[source,c]
+----
+gentype lgamma(gentype x)
+
+floatn lgamma_r(floatn x, intn *signp)
+float lgamma_r(float x, int *signp)
+
+doublen lgamma_r(doublen x, intn *signp)
+double lgamma_r(double x, int *signp)
+----
     | Log gamma function.
       Returns the natural logarithm of the absolute value of the gamma
       function.
       The sign of the gamma function is returned in the _signp_ argument of
       *lgamma_r*.
-| gentype *log*(gentype)
+|[source,c]
+----
+gentype log(gentype)
+----
     | Compute natural logarithm.
-| gentype *log2*(gentype)
+|[source,c]
+----
+gentype log2(gentype)
+----
     | Compute a base 2 logarithm.
-| gentype *log10*(gentype)
+|[source,c]
+----
+gentype log10(gentype)
+----
     | Compute a base 10 logarithm.
-| gentype *log1p*(gentype _x_)
+|[source,c]
+----
+gentype log1p(gentype x)
+----
     | Compute log~e~(1.0 + _x_).
-| gentype *logb*(gentype _x_)
+|[source,c]
+----
+gentype logb(gentype x)
+----
     | Compute the exponent of _x_, which is the integral part of
       log__~r~__(\|_x_\|).
-| gentype *mad*(gentype _a_, gentype _b_, gentype _c_)
+|[source,c]
+----
+gentype mad(
+    gentype a, gentype b, gentype c)
+----
     | *mad* computes _a_ * _b_ + _c_.
     The function may compute _a_ * _b_ + _c_ with reduced accuracy
     in the embedded profile.  See the SPIR-V OpenCL environment specification
     for details. On some hardware the mad instruction may provide better
     performance than expanded computation of _a_ * _b_ + _c_.^31^
-| gentype *maxmag*(gentype _x_, gentype _y_)
+|[source,c]
+----
+gentype maxmag(gentype x, gentype y)
+----
     | Returns _x_ if \|_x_\| > \|_y_\|, _y_ if \|_y_\| > \|_x_\|, otherwise
       *fmax*(_x_, _y_).
-| gentype *minmag*(gentype _x_, gentype _y_)
+|[source,c]
+----
+gentype minmag(gentype x, gentype y)
+----
     | Returns _x_ if \|_x_\| < \|_y_\|, _y_ if \|_y_\| < \|_x_\|, otherwise
       *fmin*(_x_, _y_).
-| gentype *modf*(gentype _x_, gentype *_iptr_)
+|[source,c]
+----
+gentype modf(gentype x, gentype *iptr)
+----
     | Decompose a floating-point number.
       The *modf* function breaks the argument _x_ into integral and
       fractional parts, each of which has the same sign as the argument.
       It stores the integral part in the object pointed to by _iptr_.
-| float__n__ *nan*(uint__n__ _nancode_) +
-  float *nan*(uint _nancode_) +
-  double__n__ *nan*(ulong__n__ _nancode_) +
-  double *nan*(ulong _nancode_)
+|[source,c]
+----
+floatn nan(uintn nancode)
+float nan(uint nancode)
+
+doublen nan(ulongn nancode)
+double nan(ulong nancode)
+----
     | Returns a quiet NaN.
       The _nancode_ may be placed in the significand of the resulting NaN.
-| gentype *nextafter*(gentype _x_, gentype _y_)
+|[source,c]
+----
+gentype nextafter(gentype x, gentype y)
+----
     | Computes the next representable single-precision floating-point value
       following _x_ in the direction of _y_.
       Thus, if _y_ is less than _x_, *nextafter*() returns the largest
       representable floating-point number less than _x_.
-| gentype *pow*(gentype _x_, gentype _y_)
+|[source,c]
+----
+gentype pow(gentype x, gentype y)
+----
     | Compute _x_ to the power _y_.
-| float__n__ *pown*(float__n__ _x_, int__n__ _y_) +
-  float *pown*(float _x_, int _y_) +
-  double__n__ *pown*(double__n__ _x_, int__n__ _y_) +
-  double *pown*(double _x_, int _y_)
+|[source,c]
+----
+floatn pown(floatn x, intn y)
+float pown(float x, int y)
+
+doublen pown(doublen x, intn y)
+double pown(double x, int y)
+----
     | Compute _x_ to the power _y_, where _y_ is an integer.
-| gentype *powr*(gentype _x_, gentype _y_)
+|[source,c]
+----
+gentype powr(gentype x, gentype y)
+----
     | Compute _x_ to the power _y_, where _x_ is >= 0.
-| gentype *remainder*(gentype _x_, gentype _y_)
+|[source,c]
+----
+gentype remainder(gentype x, gentype y)
+----
     | Compute the value _r_ such that _r_ = _x_ - _n_*_y_, where _n_ is the
       integer nearest the exact value of _x_/_y_.
       If there are two integers closest to _x_/_y_, _n_ shall be the even
       one.
       If _r_ is zero, it is given the same sign as _x_.
-| float__n__ **remquo**(float__n__ _x_, float__n__ _y_, int__n__ *_quo_) +
-  float **remquo**(float _x_, float _y_, int *_quo_)
+|[source,c]
+----
+floatn remquo(
+    floatn x, floatn y, intn *quo)
+float remquo(
+    float x, float y, int *quo)
+----
     | The *remquo* function computes the value r such that _r_ = _x_ -
       _k_*_y_, where _k_ is the integer nearest the exact value of _x_/_y_.
       If there are two integers closest to _x_/_y_, _k_ shall be the even
@@ -4270,8 +4472,13 @@ all arguments and the return type, unless otherwise specified.
       *remquo* also calculates the lower seven bits of the integral quotient
       _x_/_y_, and gives that value the same sign as _x_/_y_.
       It stores this signed value in the object pointed to by _quo_.
-| double__n__ **remquo**(double__n__ _x_, double__n__ _y_, int__n__ *_quo_) +
-  double **remquo**(double _x_, double _y_, int *_quo_)
+|[source,c]
+----
+doublen remquo(
+    doublen x, doublen y, intn *quo)
+double remquo(
+    double x, double y, int *quo)
+----
     | The *remquo* function computes the value r such that _r_ = _x_ -
       _k_*_y_, where _k_ is the integer nearest the exact value of _x_/_y_.
       If there are two integers closest to _x_/_y_, _k_ shall be the even
@@ -4281,41 +4488,85 @@ all arguments and the return type, unless otherwise specified.
       *remquo* also calculates the lower seven bits of the integral quotient
       _x_/_y_, and gives that value the same sign as _x_/_y_.
       It stores this signed value in the object pointed to by _quo_.
-| gentype *rint*(gentype)
+|[source,c]
+----
+gentype rint(gentype)
+----
     | Round to integral value (using round to nearest even rounding mode) in
       floating-point format.
       Refer to section 7.1 for description of rounding modes.
-| float__n__ *rootn*(float__n__ _x_, int__n__ _y_) +
-  float *rootn*(float _x_, int _y_) +
-  double__n__ *rootn*(double__n__ _x_, int__n__ _y_) +
-  double__n__ *rootn*(double _x_, int _y_)
+|[source,c]
+----
+floatn rootn(floatn x, intn y)
+float rootn(float x, int y)
+
+doublen rootn(doublen x, intn y)
+doublen rootn(double x, int y)
+----
     | Compute _x_ to the power 1/_y_.
-| gentype *round*(gentype _x_)
+|[source,c]
+----
+gentype round(gentype x)
+----
     | Return the integral value nearest to _x_ rounding halfway cases away
       from zero, regardless of the current rounding direction.
-| gentype *rsqrt*(gentype)
+|[source,c]
+----
+gentype rsqrt(gentype)
+----
     | Compute inverse square root.
-| gentype *sin*(gentype _x_)
+|[source,c]
+----
+gentype sin(gentype x)
+----
     | Compute sine, where _x_ is an angle in radians.
-| gentype *sincos*(gentype _x_, gentype *_cosval_)
+|[source,c]
+----
+gentype sincos(
+    gentype x, gentype *cosval)
+----
     | Compute sine and cosine of x.
       The computed sine is the return value and computed cosine is returned
       in _cosval_, where _x_ is an angle in radians.
-| gentype *sinh*(gentype _x_)
+|[source,c]
+----
+gentype sinh(gentype x)
+----
     | Compute hyperbolic sine, where _x_ is an angle in radians
-| gentype *sinpi*(gentype _x_)
+|[source,c]
+----
+gentype sinpi(gentype x)
+----
     | Compute *sin*({pi} _x_).
-| gentype *sqrt*(gentype)
+|[source,c]
+----
+gentype sqrt(gentype)
+----
     | Compute square root.
-| gentype *tan*(gentype _x_)
+|[source,c]
+----
+gentype tan(gentype x)
+----
     | Compute tangent, where _x_ is an angle in radians.
-| gentype *tanh*(gentype _x_)
+|[source,c]
+----
+gentype tanh(gentype x)
+----
     | Compute hyperbolic tangent, where _x_ is an angle in radians.
-| gentype *tanpi*(gentype _x_)
+|[source,c]
+----
+gentype tanpi(gentype x)
+----
     | Compute *tan*({pi} _x_).
-| gentype *tgamma*(gentype)
+|[source,c]
+----
+gentype tgamma(gentype)
+----
     | Compute the gamma function.
-| gentype *trunc*(gentype)
+|[source,c]
+----
+gentype trunc(gentype)
+----
     | Round to integral value using the round to zero rounding mode.
 |====
 
@@ -4354,89 +4605,173 @@ following table can take `float`, `float2`, `float3`, `float4`, `float8` or
 
 [[table-builtin-half-native-math]]
 .Scalar and Vector Argument Built-in _half_ and _native_ Math Functions
-[cols=",",]
+[cols="a,",]
 |====
 | *Function* | *Description*
-| gentype *half_cos*(gentype _x_)
+|[source,c]
+----
+gentype half_cos(gentype x)
+----
     | Compute cosine.
       _x_ is an angle in radians, and must be in the range [-2^16^, +2^16^].
-| gentype *half_divide*(gentype _x_, gentype _y_)
+|[source,c]
+----
+gentype half_divide(gentype x, gentype y)
+----
     | Compute _x_ / _y_.
-| gentype *half_exp*(gentype _x_)
+|[source,c]
+----
+gentype half_exp(gentype x)
+----
     | Compute the base-_e_ exponential of _x_.
-| gentype *half_exp2*(gentype _x_)
+|[source,c]
+----
+gentype half_exp2(gentype x)
+----
     | Compute the base- 2 exponential of _x_.
-| gentype *half_exp10*(gentype _x_)
+|[source,c]
+----
+gentype half_exp10(gentype x)
+----
     | Compute the base- 10 exponential of _x_.
-| gentype *half_log*(gentype _x_)
+|[source,c]
+----
+gentype half_log(gentype x)
+----
     | Compute natural logarithm.
-| gentype *half_log2*(gentype _x_)
+|[source,c]
+----
+gentype half_log2(gentype x)
+----
     | Compute a base 2 logarithm.
-| gentype *half_log10*(gentype _x_)
+|[source,c]
+----
+gentype half_log10(gentype x)
+----
     | Compute a base 10 logarithm.
-| gentype *half_powr*(gentype _x_, gentype _y_)
+|[source,c]
+----
+gentype half_powr(gentype x, gentype y)
+----
     | Compute _x_ to the power _y_, where _x_ is >= 0.
-| gentype *half_recip*(gentype _x_)
+|[source,c]
+----
+gentype half_recip(gentype x)
+----
     | Compute reciprocal.
-| gentype *half_rsqrt*(gentype _x_)
+|[source,c]
+----
+gentype half_rsqrt(gentype x)
+----
     | Compute inverse square root.
-| gentype *half_sin*(gentype _x_)
+|[source,c]
+----
+gentype half_sin(gentype x)
+----
     | Compute sine.
       _x_ is an angle in radians, and must be in the range [-2^16^, +2^16^].
-| gentype *half_sqrt*(gentype _x_)
+|[source,c]
+----
+gentype half_sqrt(gentype x)
+----
     | Compute square root.
-| gentype *half_tan*(gentype _x_)
+|[source,c]
+----
+gentype half_tan(gentype x)
+----
     | Compute tangent.
       _x_ is an angle in radians, and must be in the range [-2^16^, +2^16^].
 | |
-| gentype *native_cos*(gentype _x_)
+|[source,c]
+----
+gentype native_cos(gentype x)
+----
     | Compute cosine over an implementation-defined range, where _x_ is an
       angle in radians.
       The maximum error is implementation-defined.
-| gentype *native_divide*(gentype _x_, gentype _y_)
+|[source,c]
+----
+gentype native_divide(gentype x, gentype y)
+----
     | Compute _x_ / _y_ over an implementation-defined range.
       The maximum error is implementation-defined.
-| gentype *native_exp*(gentype _x_)
+|[source,c]
+----
+gentype native_exp(gentype x)
+----
     | Compute the base-__e__ exponential of _x_ over an
       implementation-defined range.
       The maximum error is implementation-defined.
-| gentype *native_exp2*(gentype _x_)
+|[source,c]
+----
+gentype native_exp2(gentype x)
+----
     | Compute the base-2 exponential of _x_ over an implementation-defined
       range.
       The maximum error is implementation-defined.
-| gentype *native_exp10*(gentype _x_)
+|[source,c]
+----
+gentype native_exp10(gentype x)
+----
     | Compute the base-10 exponential of _x_ over an implementation-defined
       range.
       The maximum error is implementation-defined.
-| gentype *native_log*(gentype _x_)
+|[source,c]
+----
+gentype native_log(gentype x)
+----
     | Compute natural logarithm over an implementation-defined range.
       The maximum error is implementation-defined.
-| gentype *native_log2*(gentype _x_)
+|[source,c]
+----
+gentype native_log2(gentype x)
+----
     | Compute a base 2 logarithm over an
       implementation-defined range.
       The maximum error is implementation-defined.
-| gentype *native_log10*(gentype _x_)
+|[source,c]
+----
+gentype native_log10(gentype x)
+----
     | Compute a base 10 logarithm over
       an implementation-defined range.
       The maximum error is implementation-defined.
-| gentype *native_powr*(gentype _x_, gentype _y_)
+|[source,c]
+----
+gentype native_powr(gentype x, gentype y)
+----
     | Compute _x_ to the power _y_, where _x_ is >= 0.
       The range of _x_ and _y_ are implementation-defined.
       The maximum error is implementation-defined.
-| gentype *native_recip*(gentype _x_)
+|[source,c]
+----
+gentype native_recip(gentype x)
+----
     | Compute reciprocal over an implementation-defined range.
       The maximum error is implementation-defined.
-| gentype *native_rsqrt*(gentype _x_)
+|[source,c]
+----
+gentype native_rsqrt(gentype x)
+----
     | Compute inverse square root over an implementation-defined range.
       The maximum error is implementation-defined.
-| gentype *native_sin*(gentype _x_)
+|[source,c]
+----
+gentype native_sin(gentype x)
+----
     | Compute sine over an implementation-defined range, where _x_ is an
       angle in radians.
       The maximum error is implementation-defined.
-| gentype *native_sqrt*(gentype _x_)
+|[source,c]
+----
+gentype native_sqrt(gentype x)
+----
     | Compute square root over an implementation-defined range.
       The maximum error is implementation-defined.
-| gentype *native_tan*(gentype _x_)
+|[source,c]
+----
+gentype native_tan(gentype x)
+----
     | Compute tangent over an implementation-defined range, where _x_ is an
       angle in radians.
       The maximum error is implementation-defined.
