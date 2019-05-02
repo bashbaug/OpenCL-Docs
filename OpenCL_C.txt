@@ -5062,9 +5062,13 @@ gentype rhadd(gentype x, gentype y)
 |[source,c]
 ----
 gentype clamp(
-    gentype x, gentype minval, gentype maxval)
+    gentype x,
+    gentype minval,
+    gentype maxval)
 gentype clamp(
-    gentype x, sgentype minval, sgentype maxval)
+    gentype x,
+    sgentype minval,
+    sgentype maxval)
 ----
     | Returns *min*(*max*(_x_, _minval_), _maxval_).
       Results are undefined if _minval_ > _maxval_.
@@ -5085,12 +5089,14 @@ gentype ctz(gentype x)
       type of _x_, if _x_ is a vector.
 |[source,c]
 ----
-gentype mad_hi(gentype a, gentype b, gentype c)
+gentype mad_hi(
+    gentype a, gentype b, gentype c)
 ----
     | Returns *mul_hi*(_a_, _b_) + _c_.
 |[source,c]
 ----
-gentype mad_sat(gentype a, gentype b, gentype c)
+gentype mad_sat(
+    gentype a, gentype b, gentype c)
 ----
     | Returns _a_ * _b_ + _c_ and saturates the result.
 |[source,c]
@@ -5277,46 +5283,82 @@ even rounding mode.
 
 [[table-builtin-common]]
 .Scalar and Vector Argument Built-in Common Function Table
-[cols=",",]
+[cols="a,a",]
 |====
 | *Function* | *Description*
-| gentype *clamp*(gentype _x_, gentype _minval_, gentype _maxval_) +
-  gentypef *clamp*(gentypef _x_, float _minval_, float _maxval_) +
-  gentyped *clamp*(gentyped _x_, double _minval_, double _maxval_)
+|[source,c]
+----
+gentype clamp(
+    gentype x,
+    gentype minval, gentype maxval)
+gentypef clamp(
+    gentypef x,
+    float minval, float maxval)
+gentyped clamp(
+    gentyped x,
+    double minval, double maxval)
+----
     | Returns *fmin*(*fmax*(_x_, _minval_), _maxval_).
       Results are undefined if _minval_ > _maxval_.
-| gentype *degrees*(gentype _radians_)
+|[source,c]
+----
+gentype degrees(gentype radians)
+----
     | Converts _radians_ to degrees, i.e. (180 / {pi}) * _radians_.
-| gentype *max*(gentype _x_, gentype _y_) +
-  gentypef *max*(gentypef _x_, float _y_) +
-  gentyped *max*(gentyped _x_, double _y_)
+|[source,c]
+----
+gentype max(gentype x, gentype y)
+gentypef max(gentypef x, float y)
+gentyped max(gentyped x, double y)
+----
     | Returns _y_ if _x_ < _y_, otherwise it returns _x_.
       If _x_ or _y_ are infinite or NaN, the return values are undefined.
-| gentype *min*(gentype _x_, gentype _y_) +
-  gentypef *min*(gentypef _x_, float _y_) +
-  gentyped *min*(gentyped _x_, double _y_)
+|[source,c]
+----
+gentype min(gentype x, gentype y)
+gentypef min(gentypef x, float y)
+gentyped min(gentyped x, double y)
+----
     | Returns _y_ if _y_ < _x_, otherwise it returns _x_.
       If _x_ or _y_ are infinite or NaN, the return values are undefined.
-| gentype *mix*(gentype _x_, gentype _y_, gentype _a_) +
-  gentypef *mix*(gentypef _x_, gentypef _y_, float _a_) +
-  gentyped *mix*(gentyped _x_, gentyped _y_, double _a_)
+|[source,c]
+----
+gentype mix(
+    gentype x, gentype y, gentype a)
+gentypef mix(
+    gentypef x, gentypef y, float a)
+gentyped mix(
+    gentyped x, gentyped y, double a)
+----
     | Returns the linear blend of _x_ & _y_ implemented as:
 
-      _x_ + (_y_ - _x_) * _a_
+_x_ + (_y_ - _x_) * _a_
 
-      _a_ must be a value in the range [0.0, 1.0].
-      If _a_ is not in the range [0.0, 1.0], the return values are
-      undefined.
-| gentype *radians*(gentype _degrees_)
+_a_ must be a value in the range [0.0, 1.0].
+If _a_ is not in the range [0.0, 1.0], the return values are
+undefined.
+|[source,c]
+----
+gentype radians(gentype degrees)
+----
     | Converts _degrees_ to radians, i.e. ({pi} / 180) * _degrees_.
-| gentype *step*(gentype _edge_, gentype _x_) +
-  gentypef *step*(float _edge_, gentypef _x_) +
-  gentyped *step*(double _edge_, gentyped _x_)
+|[source,c]
+----
+gentype step(gentype edge, gentype x)
+gentypef step(float edge, gentypef x)
+gentyped step(double edge, gentyped x)
+----
     | Returns 0.0 if _x_ < _edge_, otherwise it returns 1.0.
-| gentype *smoothstep*(gentype _edge0_, gentype _edge1_, gentype _x_) +
-  gentypef *smoothstep*(float _edge0_, float _edge1_, gentypef _x_) +
-  gentyped *smoothstep*(double _edge0_, double _edge1_, gentyped _x_)
-   a| Returns 0.0 if _x_ \<= _edge0_ and 1.0 if _x_ >= _edge1_ and performs
+|[source,c]
+----
+gentype smoothstep(
+    gentype edge0, gentype edge1, gentype x)
+gentypef smoothstep(
+    float edge0, float edge1, gentypef x)
+gentyped smoothstep(
+    double edge0, double edge1, gentyped x)
+----
+    | Returns 0.0 if _x_ \<= _edge0_ and 1.0 if _x_ >= _edge1_ and performs
       smooth Hermite interpolation between 0 and 1 when _edge0_ < _x_ <
       _edge1_.
       This is useful in cases where you would want a threshold function with
@@ -5327,7 +5369,8 @@ This is equivalent to:
 [source,c]
 ----------
 gentype t;
-t = clamp ((x - edge0) / (edge1 - edge0), 0, 1);
+t = clamp((x-edge0) / (edge1-edge0),
+      0, 1);
 return t * t * (3 - 2 * t);
 ----------
 
