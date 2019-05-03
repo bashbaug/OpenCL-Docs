@@ -5352,11 +5352,14 @@ gentyped step(double edge, gentyped x)
 |[source,c]
 ----
 gentype smoothstep(
-    gentype edge0, gentype edge1, gentype x)
+    gentype edge0, gentype edge1,
+    gentype x)
 gentypef smoothstep(
-    float edge0, float edge1, gentypef x)
+    float edge0, float edge1,
+    gentypef x)
 gentyped smoothstep(
-    double edge0, double edge1, gentyped x)
+    double edge0, double edge1,
+    gentyped x)
 ----
     | Returns 0.0 if _x_ \<= _edge0_ and 1.0 if _x_ >= _edge1_ and performs
       smooth Hermite interpolation between 0 and 1 when _edge0_ < _x_ <
@@ -5376,7 +5379,10 @@ return t * t * (3 - 2 * t);
 
 Results are undefined if _edge0_ >= _edge1_ or if _x_, _edge0_ or _edge1_ is
 a NaN.
-| gentype *sign*(gentype _x_)
+|[source,c]
+----
+gentype sign(gentype x)
+----
     | Returns 1.0 if _x_ > 0, -0.0 if _x_ = -0.0, +0.0 if _x_ = +0.0, or
       -1.0 if _x_ < 0.
       Returns 0.0 if _x_ is a NaN.
@@ -5404,37 +5410,62 @@ even rounding mode.
 
 [[table-builtin-geometric]]
 .Scalar and Vector Argument Built-in Geometric Function Table
-[cols=",",]
+[cols="a,",]
 |====
 | *Function* | *Description*
-| float4 *cross*(float4 _p0_, float4 _p1_) +
-  float3 *cross*(float3 _p0_, float3 _p1_) +
-  double4 *cross*(double4 _p0_, double4 _p1_) +
-  double3 *cross*(double3 _p0_, double3 _p1_)
+|[source,c]
+----
+float4 cross(float4 p0, float4 p1)
+float3 cross(float3 p0, float3 p1)
+double4 cross(double4 p0, double4 p1)
+double3 cross(double3 p0, double3 p1)
+----
     | Returns the cross product of _p0.xyz_ and _p1.xyz_.
       The _w_ component of `float4` result returned will be 0.0.
-| float *dot*(float__n__ _p0_, float__n__ _p1_) +
-  double *dot*(double__n__ _p0_, double__n__ _p1_)
+|
+[source,c]
+----
+float dot(floatn p0, floatn p1)
+double dot(doublen p0, doublen p1)
+----
      | Compute dot product.
-| float *distance*(float__n__ _p0_, float__n__ _p1_) +
-  double *distance*(double__n__ _p0_, double__n__ _p1_)
+|[source,c]
+----
+float distance(floatn p0, floatn p1)
+double distance(doublen p0, doublen p1)
+----
     | Returns the distance between _p0_ and _p1_.
       This is calculated as *length*(_p0_ - _p1_).
-| float *length*(float__n__ _p_) +
-  double *length*(double__n__ _p_)
+|[source,c]
+----
+float length(floatn p)
+double length(doublen p)
+----
     | Return the length of vector _p_, i.e., {sqrt} __p.x__^2^ + _p.y_ ^2^
       {plus} ...
-| float__n__ *normalize*(float__n__ _p_) +
-  double__n__ *normalize*(double__n__ _p_)
+|[source,c]
+----
+floatn normalize(floatn p)
+doublen normalize(doublen p)
+----
     | Returns a vector in the same direction as _p_ but with a length of 1.
 | |
-| float *fast_distance*(float__n__ _p0_, float__n__ _p1_)
+|[source,c]
+----
+float fast_distance(floatn p0, floatn p1)
+----
     | Returns *fast_length*(_p0_ - _p1_).
-| float *fast_length*(float__n__ _p_)
+|[source,c]
+----
+float fast_length(floatn p)
+----
     | Returns the length of vector _p_ computed as:
 
       *half_sqrt*(__p.x__^2^ + __p.y__^2^ + ...)
-| float__n__ *fast_normalize*(float__n__ _p_)
+|[source,c]
+----
+floatn fast_normalize(floatn p)
+----
    a| Returns a vector in the same direction as _p_ but with a length of 1.
       *fast_normalize* is computed as:
 +
