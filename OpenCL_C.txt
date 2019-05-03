@@ -5682,11 +5682,16 @@ Specification>>.
 
 [[table-vector-loadstore]]
 .Vector Data Load and Store Functions^38^
-[cols=",",]
+[cols="a,",]
 |====
 | *Function* | *Description*
-| gentype__n__ **vload__n__**(size_t _offset_, const gentype *_p_) +
-  gentype__n__ **vload__n__**(size_t _offset_, const {constant} gentype *_p_)
+|[source,c]
+----
+gentypen vloadn(
+    size_t offset, const gentype *p)
+gentypen vloadn(
+    size_t offset, const {constant} gentype *p)
+----
     | Return `sizeof(gentype__n__)` bytes of data, where the first `(__n__ *
       sizeof(gentype))` bytes are read from the address
       computed as `(_p_ {plus} (_offset_ * _n_))`.
