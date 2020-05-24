@@ -389,4 +389,95 @@ additional types in an entry point's parameter list.
 
 An *OpVariable* in a SPIR-V module with the *BuiltIn* decoration represents
 a built-in variable.
-All built-in variables must be in the *Input* storage class.
+All built-in variables must be in the *Input* storage class and must be of
+a supported type.
+
+Supported types for each built-in variable decoration are described in the
+table below.
+
+In the table, the `size_t` type is defined to be:
+
+* A 32-bit integer type, when the _Addressing Model_ declared in
+  *OpMemoryModel* is *Physical32*.
+* A 64-bit integer type, when the _Addressing Model_ declared in
+  *OpMemoryModel* is *Physical64*.
+
+[[types_for_builtin_variables]]
+.Supported Built-in Variables and Types
+[width="100%",cols="1,2",options="header"]
+|====
+| *BuiltIn*
+| *Supported Types*
+
+| *NumWorkgroups*
+| An *OpTypeVector* of three `size_t` components.
+
+| *WorkgroupSize*
+| An *OpTypeVector* of three `size_t` components.
+
+| *WorkgroupId*
+| An *OpTypeVector* of three `size_t` components.
+
+| *NumWorkgroups*
+| An *OpTypeVector* of three `size_t` components.
+
+| *WorkgroupSize*
+| An *OpTypeVector* of three `size_t` components.
+
+| *WorkgroupId*
+| An *OpTypeVector* of three `size_t` components.
+
+| *LocalInvocationId*
+| An *OpTypeVector* of three `size_t` components.
+
+| *GlobalInvocationId*
+| An *OpTypeVector* of three `size_t` components.
+
+| *LocalInvocationIndex*
+| A `size_t` scalar.
+
+| *WorkDim*
+| An *OpTypeVector* of three 32-bit integer components.
+
+| *GlobalSize*
+| An *OpTypeVector* of three `size_t` components.
+
+| *EnqueuedWorkgroupSize*
+| An *OpTypeVector* of three `size_t` components.
+
+| *GlobalOffset*
+| An *OpTypeVector* of three `size_t` components.
+
+| *GlobalLinearId*
+| A `size_t` scalar.
+
+| *SubgroupSize*
+| A 32-bit integer scalar.
+
+| *SubgroupMaxSize*
+| A 32-bit integer scalar.
+
+| *NumSubgroups*
+| A 32-bit integer scalar.
+
+| *NumEnqueuedSubgroups*
+| A 32-bit integer scalar.
+
+| *SubgroupId*
+| A 32-bit integer scalar.
+
+| *SubgroupLocalInvocationId*
+| A 32-bit integer scalar.
+
+|====
+
+//| SubgroupEqMask
+//| An *OpTypeVector* of four 32-bit integer components.
+//| SubgroupGeMask
+//| An *OpTypeVector* of four 32-bit integer components.
+//| SubgroupGtMask
+//| An *OpTypeVector* of four 32-bit integer components.
+//| SubgroupLeMask
+//| An *OpTypeVector* of four 32-bit integer components.
+//| SubgroupLtMask
+//| An *OpTypeVector* of four 32-bit integer components.
