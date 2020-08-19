@@ -8885,7 +8885,10 @@ include::{generated}/api/version-notes/CL_COMMAND_SVM_UNMAP.asciidoc[]
 
 include::{generated}/api/version-notes/CL_COMMAND_SVM_MIGRATE_MEM.asciidoc[]
 
-Prior to OpenCL 3.0, the event command type returned by {clEnqueueSVMMigrateMem} is implementation-defined.
+Prior to OpenCL 3.0, implementations should return
+{CL_COMMAND_MIGRATE_MEM_OBJECTS} as the event command type for
+{clEnqueueSVMMigrateMem}, but may return an implementation-defined
+event command type.
   | {clEnqueueSVMMigrateMem}
 
 |====
