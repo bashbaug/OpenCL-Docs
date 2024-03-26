@@ -1,3 +1,8 @@
+THIS IS A PREVIEW SPECIFICATION BUILD TO REVIEW IN-FLIGHT CHANGES!
+
+Published specifications may be found on the Khronos OpenCL Registry; see
+https://registry.khronos.org/OpenCL/.
+
 Copyright 2008-2024 The Khronos Group Inc.
 
 This Specification is protected by copyright laws and contains material proprietary to Khronos.
