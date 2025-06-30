@@ -32,8 +32,8 @@ Shipping
 
 == Version
 
-Built On: 2025-02-28 +
-Version: 1.1.0
+Built On: 2025-06-30 +
+Version: 1.2.0
 
 == Dependencies
 
@@ -1142,7 +1142,7 @@ If the OpenCL environment supports the extension `cl_intel_subgroup_2d_block_io`
   * *Subgroup2DBlockTransformINTEL*
   * *Subgroup2DBlockTransposeINTEL*
 
-The table below describes valid 2D block load and store dimensions for different element sizes:
+The table below describes valid 2D block load and store dimensions for different element sizes for extension version 1.1.0:
 
 [cols="1,5*^,4",width="100%"]
 [options="header"]
@@ -1190,8 +1190,75 @@ The table below describes valid 2D block load and store dimensions for different
 
 |=====
 
+The table below describes valid 2D block load and store dimensions for different element sizes for extension version 1.2.0:
+
+[cols="1,2*^2,2*^3,^1",width="100%"]
+[options="header"]
+|=====
+| Instruction | Pointer Type | Element Size (Bytes) | Block Width (Elements) | Block Height (Rows) | Block Count
+
+6+| *Block Loads:*
+
+| *OpSubgroup2DBlockLoadINTEL* | `uint8_t`, `void` (untyped) | 1 | 4, 8, 16, 32, 64 | 1, 2, 4, 8, 16, 32 | 1
+| *OpSubgroup2DBlockLoadINTEL* | `uint8_t`, `void` (untyped) | 1 | 4, 8, 16, 32     | 1, 2, 4, 8, 16, 32 | 2
+| *OpSubgroup2DBlockLoadINTEL* | `uint8_t`, `void` (untyped) | 1 | 4, 8, 16         | 1, 2, 4, 8, 16, 32 | 4
+
+| *OpSubgroup2DBlockLoadINTEL* | `uint16_t`, `void` (untyped) | 2 | 2, 4, 8, 16, 32 | 1, 2, 4, 8, 16, 32 | 1
+| *OpSubgroup2DBlockLoadINTEL* | `uint16_t`, `void` (untyped) | 2 | 2, 4, 8, 16     | 1, 2, 4, 8, 16, 32 | 2
+| *OpSubgroup2DBlockLoadINTEL* | `uint16_t`, `void` (untyped) | 2 | 2, 4, 8         | 1, 2, 4, 8, 16, 32 | 4
+
+| *OpSubgroup2DBlockLoadINTEL* | `uint32_t`, `void` (untyped) | 4 | 1, 2, 4, 8, 16 | 1, 2, 4, 8, 16, 32 | 1
+| *OpSubgroup2DBlockLoadINTEL* | `uint32_t`, `void` (untyped) | 4 | 1, 2, 4, 8     | 1, 2, 4, 8, 16, 32 | 2
+
+| *OpSubgroup2DBlockLoadINTEL* | `uint64_t`, `void` (untyped) | 8 | 1, 2, 4, 8 | 1, 2, 4, 8, 16, 32 | 1
+
+6+| *Block Loads with Transform:*
+
+| *OpSubgroup2DBlockLoadTransformINTEL* | `uint8_t`, `void` (untyped) | 1 | 4, 8, 16, 32, 64 | 4, 8, 16, 32 | 1
+| *OpSubgroup2DBlockLoadTransformINTEL* | `uint8_t`, `void` (untyped) | 1 | 4, 8, 16, 32     | 4, 8, 16, 32 | 2
+| *OpSubgroup2DBlockLoadTransformINTEL* | `uint8_t`, `void` (untyped) | 1 | 4, 8, 16         | 4, 8, 16, 32 | 4
+
+| *OpSubgroup2DBlockLoadTransformINTEL* | `uint16_t`, `void` (untyped) | 2 | 2, 4, 8, 16, 32 | 2, 4, 8, 16, 32 | 1
+| *OpSubgroup2DBlockLoadTransformINTEL* | `uint16_t`, `void` (untyped) | 2 | 2, 4, 8, 16     | 2, 4, 8, 16, 32 | 1
+| *OpSubgroup2DBlockLoadTransformINTEL* | `uint16_t`, `void` (untyped) | 2 | 2, 4, 8         | 2, 4, 8, 16, 32 | 1
+
+6+| *Block Loads with Transpose:*
+
+| *OpSubgroup2DBlockLoadTransposeINTEL* | `uint32_t`, `void` (untyped) | 4 | 1, 2, 4, 8 | 1, 2, 4, 8, 16, 32 | 1
+
+| *OpSubgroup2DBlockLoadTransposeINTEL* | `uint64_t`, `void` (untyped) | 4 | 1, 2, 4 | 8 | 1
+
+6+| *Block Stores:*
+
+| *OpSubgroup2DBlockStoreINTEL* | `uint8_t`, `void` (untyped) | 1 | 4, 8, 16, 32, 64 | 1, 2, 4, 8 | 1
+
+| *OpSubgroup2DBlockStoreINTEL* | `uint16_t`, `void` (untyped) | 2 | 2, 4, 8, 16, 32 | 1, 2, 4, 8 | 1
+
+| *OpSubgroup2DBlockStoreINTEL* | `uint32_t`, `void` (untyped) | 4 | 1, 2, 4, 8, 16 | 1, 2, 4, 8 | 1
+
+| *OpSubgroup2DBlockStoreINTEL* | `uint64_t`, `void` (untyped) | 8 | 1, 2, 4, 8 | 1, 2, 4, 8 | 1
+
+6+| *Block Prefetch:*
+
+| *OpSubgroup2DBlockPrefetchINTEL* | `uint8_t`, `void` (untyped) | 1 | 4, 8, 16, 32, 64 | 1, 2, 4, 8, 16, 32 | 1
+| *OpSubgroup2DBlockPrefetchINTEL* | `uint8_t`, `void` (untyped) | 1 | 4, 8, 16, 32     | 1, 2, 4, 8, 16, 32 | 2
+| *OpSubgroup2DBlockPrefetchINTEL* | `uint8_t`, `void` (untyped) | 1 | 4, 8, 16         | 1, 2, 4, 8, 16, 32 | 4
+
+| *OpSubgroup2DBlockPrefetchINTEL* | `uint16_t`, `void` (untyped) | 2 | 2, 4, 8, 16, 32 | 1, 2, 4, 8, 16, 32 | 1
+| *OpSubgroup2DBlockPrefetchINTEL* | `uint16_t`, `void` (untyped) | 2 | 2, 4, 8, 16     | 1, 2, 4, 8, 16, 32 | 2
+| *OpSubgroup2DBlockPrefetchINTEL* | `uint16_t`, `void` (untyped) | 2 | 2, 4, 8         | 1, 2, 4, 8, 16, 32 | 4
+
+| *OpSubgroup2DBlockPrefetchINTEL* | `uint32_t`, `void` (untyped) | 4 | 1, 2, 4, 8, 16 | 1, 2, 4, 8, 16, 32 | 1
+| *OpSubgroup2DBlockPrefetchINTEL* | `uint32_t`, `void` (untyped) | 4 | 1, 2, 4, 8     | 1, 2, 4, 8, 16, 32 | 2
+
+| *OpSubgroup2DBlockPrefetchINTEL* | `uint64_t`, `void` (untyped) | 8 | 1, 2, 4, 8 | 1, 2, 4, 8, 16, 32 | 1
+
+|=====
+
 For all instructions:
 
+* The subgroup size must be 16, as defined by the *SubgroupMaxSize* built-in variable.
+Behavior is undefined if these instructions are called from kernels with a different subgroup size.
 * The _Memory Width_, _Memory Height_, and _Memory Pitch_ operands must be 32-bit integer type scalars.
 * The _Coordinate_ must be a vector of two 32-bit integer type components.
 
@@ -1207,5 +1274,6 @@ None.
 |========================================
 |Rev|Date|Author|Changes
 |1.0.0|2024-12-03|Bartosz Kościelak|*Initial revision*
-|1.1.0|2024-02-28|Ben Ashbaugh|Added SPIR-V support.
+|1.1.0|2025-02-28|Ben Ashbaugh|Added SPIR-V support.
+|1.2.0|2025-06-30|Ben Ashbaugh|Added SPIR-V support for additional block shapes.
 |========================================
