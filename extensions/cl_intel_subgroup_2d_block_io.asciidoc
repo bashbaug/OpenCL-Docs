@@ -1257,10 +1257,14 @@ The table below describes valid 2D block load and store dimensions for different
 
 For all instructions:
 
-* The subgroup size must be 16, as defined by the *SubgroupMaxSize* built-in variable.
-Behavior is undefined if these instructions are called from kernels with a different subgroup size.
 * The _Memory Width_, _Memory Height_, and _Memory Pitch_ operands must be 32-bit integer type scalars.
 * The _Coordinate_ must be a vector of two 32-bit integer type components.
+
+The subgroup size requirements for all instructions were changed in extension version 1.3:
+
+* For extension versions prior to version 1.3, the subgroup size must be 16, as defined by the *SubgroupMaxSize* built-in variable.
+Behavior is undefined if these instructions are called from kernels with a different subgroup size.
+* For extension versions 1.3 and newer, the subgroup size may be either 16 or 32.
 
 == Issues
 
@@ -1276,4 +1280,5 @@ None.
 |1.0.0|2024-12-03|Bartosz Kościelak|*Initial revision*
 |1.1.0|2025-02-28|Ben Ashbaugh|Added SPIR-V support.
 |1.2.0|2025-06-30|Ben Ashbaugh|Added SPIR-V support for additional block shapes.
+|1.3.0|2025-08-11|Ben Ashbaugh|Added SPIR-V support for a sub-group size of 32.
 |========================================
