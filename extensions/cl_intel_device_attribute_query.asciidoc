@@ -38,6 +38,7 @@ Ben Ashbaugh, Intel (ben 'dot' ashbaugh 'at' intel 'dot' com)
 
 // spell-checker: disable
 Ben Ashbaugh, Intel +
+Chunyang Dai, Intel +
 Maciej Dziuban, Intel +
 Rafik Saliev, Intel
 // spell-checker: enable
@@ -53,7 +54,7 @@ Shipping
 == Version
 
 Built On: {docdate} +
-Version: 1.0.0
+Version: 1.0.1
 
 == Dependencies
 
@@ -77,7 +78,7 @@ Additional queries may be added in subsequent versions of the extension:
 
 [source]
 ----
-/* For GPU devices, version 1.0.0: */
+/* For GPU and CPU devices, version 1.0.0: */
 
 #define CL_DEVICE_IP_VERSION_INTEL                0x4250
 #define CL_DEVICE_ID_INTEL                        0x4251
@@ -128,27 +129,44 @@ The device queries described in the Device Queries table should return the same 
   | `cl_version`
       | The IP version for the device.
         The meaning of this version is implementation-defined, but newer devices should have a higher version than older devices.
+
+        For Intel GPU devices, please refer to https://github.com/intel/compute-runtime/blob/master/third_party/aot_config_headers/platforms.h[this header file], which describes what this query returns for each device.
+
 | {CL_DEVICE_ID_INTEL}
   | `cl_uint`
-      | A unique device identifier for the OpenCL device.
+      | A unique identifier for the device.
 
-        If the implementation is driven primarily by a PCI device with a PCI device ID, the low 16 bits of the device identifier must contain that PCI device ID, and the remaining bits must be set to zero.
-        Otherwise, the choice of what to return may be dictated by operating system or platform policies - but should uniquely identify both the device version and any major configuration options (for example, core count in the case of multi-core devices).
+        For Intel GPU devices, the returned value contains the PCI device ID in the low 16 bits and the upper 16 bits set to zero.
+
+        For Intel CPU devices, the returned value contains the CPUID model, family, and stepping information, as returned in `EAX` when `CPUID` executes with `EAX` equal to one.
+
 | {CL_DEVICE_NUM_SLICES_INTEL}
   | `cl_uint`
-      | The number of slices in the device.
+      | For Intel GPU devices, returns the number of slices in the device.
         A slice is a collection of sub-slices.
+
+        For Intel CPU devices, returns the number of NUMA nodes.
+
 | {CL_DEVICE_NUM_SUB_SLICES_PER_SLICE_INTEL}
   | `cl_uint`
-      | The maximum number of sub-slices in one slice.
+      | For Intel GPU devices, returns the maximum number of sub-slices in one slice.
         A sub-slice is a collection of execution units (EUs), fixed-function units, and caches.
+
+        For Intel CPU devices, unconditionally returns one.
+
 | {CL_DEVICE_NUM_EUS_PER_SUB_SLICE_INTEL}
   | `cl_uint`
-      | The maximum number of execution units (EUs) in one sub-slice.
+      | For Intel GPU devices, returns the maximum number of execution units (EUs) in one sub-slice.
         An execution unit is a multi-threaded processor that runs OpenCL kernels.
+
+        For Intel CPU devices, returns the number of physical cores per NUMA node.
+
 | {CL_DEVICE_NUM_THREADS_PER_EU_INTEL}
   | `cl_uint`
-      | The maximum number of threads that may be simultaneously resident on one execution unit (EU).
+      | For Intel GPU devices, returns the maximum number of threads that may be simultaneously resident on one execution unit (EU).
+
+        For Intel CPU devices, returns the maximum number of number of threads per core.
+
 | {CL_DEVICE_FEATURE_CAPABILITIES_INTEL}
   | {cl_device_feature_capabilities_intel_TYPE}
       | Feature flags describing capabilities supported by the device.
@@ -184,6 +202,7 @@ If we decide to add it back, note that some caches are local to the device, whil
 |========================================
 |Version|Date|Author|Changes
 |1.0.0|2021-08-12|Ben Ashbaugh|*Initial public revision*
+|1.0.0|2026-03-13|Ben Ashbaugh|Added IP version documentation, added CPU information.
 |========================================
 
 
