@@ -78,7 +78,7 @@ Additional queries may be added in subsequent versions of the extension:
 
 [source]
 ----
-/* For GPU and CPU devices, version 1.0.0: */
+/* For GPU and CPU devices, version 1.0.X: */
 
 #define CL_DEVICE_IP_VERSION_INTEL                0x4250
 #define CL_DEVICE_ID_INTEL                        0x4251
@@ -96,7 +96,7 @@ Additional feature flags may be added in subsequent versions of the extension.
 ----
 typedef cl_bitfield         cl_device_feature_capabilities_intel;
 
-/* For GPU devices, version 1.0.0: */
+/* For GPU devices, version 1.0.X: */
 
 #define CL_DEVICE_FEATURE_FLAG_DP4A_INTEL         (1 << 0)
 #define CL_DEVICE_FEATURE_FLAG_DPAS_INTEL         (1 << 1)
@@ -202,7 +202,7 @@ If we decide to add it back, note that some caches are local to the device, whil
 |========================================
 |Version|Date|Author|Changes
 |1.0.0|2021-08-12|Ben Ashbaugh|*Initial public revision*
-|1.0.0|2026-03-13|Ben Ashbaugh|Added IP version documentation, added CPU information.
+|1.0.1|2026-03-13|Ben Ashbaugh|Added IP version documentation, added CPU information.
 |========================================
 
 
