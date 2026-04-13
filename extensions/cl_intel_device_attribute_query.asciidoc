@@ -165,7 +165,7 @@ The device queries described in the Device Queries table should return the same 
   | `cl_uint`
       | For Intel GPU devices, returns the maximum number of threads that may be simultaneously resident on one execution unit (EU).
 
-        For Intel CPU devices, returns the maximum number of number of threads per core.
+        For Intel CPU devices, returns the maximum number of threads per core.
 
 | {CL_DEVICE_FEATURE_CAPABILITIES_INTEL}
   | {cl_device_feature_capabilities_intel_TYPE}
