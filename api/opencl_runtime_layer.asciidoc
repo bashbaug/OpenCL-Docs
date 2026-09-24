@@ -8373,14 +8373,9 @@ include::{generated}/api/version-notes/clEnqueueSVMMemFill.asciidoc[]
 
   * _command_queue_ refers to the host command-queue in which the fill command
     will be queued.
-    The OpenCL context associated with _command_queue_ and SVM pointer referred
-    to by _svm_ptr_ must be the same.
   * _svm_ptr_ is a pointer to a memory region that will be filled with
     _pattern_.
     It must be aligned to _pattern_size_ bytes.
-    If _svm_ptr_ is allocated using {clSVMAlloc} then it must be allocated from
-    the same context from which _command_queue_ was created.
-    Otherwise the behavior is undefined.
   * _pattern_ is a pointer to the data pattern of size _pattern_size_ in bytes.
     _pattern_ will be used to fill a region in _buffer_ starting at _svm_ptr_
     and is _size_ bytes in size.
@@ -8395,6 +8390,7 @@ include::{generated}/api/version-notes/clEnqueueSVMMemFill.asciidoc[]
     floating-point vector data type supported by the OpenCL device.
     The memory associated with _pattern_ can be reused or freed after the
     function returns.
+    Behavior is undefined if _pattern_ is allocated using {clSVMAlloc}.
   * _size_ is the size in bytes of region being filled starting with _svm_ptr_
     and must be a multiple of _pattern_size_.
   * _event_wait_list_ and _num_events_in_wait_list_ specify events that need to
@@ -8417,6 +8413,14 @@ include::{generated}/api/version-notes/clEnqueueSVMMemFill.asciidoc[]
     command or to wait for this command to complete.
     If _event_wait_list_ and _event_ are not `NULL`, _event_ must not refer
     to an element of the _event_wait_list_ array.
+
+If _svm_ptr_ was allocated using {clSVMAlloc}, and it was allocated from a
+different context than the context specified when _command_queue_ was created,
+then behavior is undefined.
+
+If _svm_ptr_ was not allocated using {clSVMAlloc}, and the device associated
+with _command_queue_ does not support fine-grain system SVM, then behavior is
+undefined.
 
 // refError
 
