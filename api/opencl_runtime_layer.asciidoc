@@ -1603,15 +1603,9 @@ include::{generated}/api/version-notes/clEnqueueFillBuffer.asciidoc[]
   * _pattern_ is a pointer to the data pattern of size _pattern_size_ in bytes.
     _pattern_ will be used to fill a region in _buffer_ starting at _offset_ and
     is _size_ bytes in size.
-    The data pattern must be a scalar or vector integer or floating-point data
-    type supported by OpenCL as described in <<scalar-data-types, Shared
-    Application Scalar Data Types>> and <<vector-data-types, Supported
-    Application Vector Data Types>>.
-    For example, if _buffer_ is to be filled with a pattern of `float4` values,
-    then _pattern_ will be a pointer to a `cl_float4` value and _pattern_size_
-    will be `sizeof(cl_float4)`.
-    The maximum value of _pattern_size_ is the size of the largest integer or
-    floating-point vector data type supported by the OpenCL device.
+    _pattern_size_ must be a power of two and the maximum value of
+    _pattern_size_ is the size of the largest integer or floating-point vector
+    data type supported by the OpenCL device.
     The memory associated with _pattern_ can be reused or freed after the
     function returns.
   * _offset_ is the location in bytes of the region being filled in _buffer_ and
@@ -8379,8 +8373,9 @@ include::{generated}/api/version-notes/clEnqueueSVMMemFill.asciidoc[]
   * _pattern_ is a pointer to the data pattern of size _pattern_size_ in bytes.
     _pattern_ will be used to fill a memory region starting at _svm_ptr_ that is
     _size_ bytes in size.
-    The maximum value of _pattern_size_ is the size of the largest integer or
-    floating-point vector data type supported by the OpenCL device.
+    _pattern_size_ must be a power of two and the maximum value of
+    _pattern_size_ is the size of the largest integer or floating-point vector
+    data type supported by the OpenCL device.
     The memory associated with _pattern_ can be reused or freed after the
     function returns.
     Behavior is undefined if _pattern_ is allocated using {clSVMAlloc}.
@@ -16493,8 +16488,9 @@ endif::cl_khr_command_buffer_multi_device[]
   * _pattern_ is a pointer to the data pattern of size _pattern_size_ in bytes.
     _pattern_ will be used to fill a memory region starting at _svm_ptr_ that is
     _size_ bytes in size.
-    The maximum value of _pattern_size_ is the size of the largest integer or
-    floating-point vector data type supported by the OpenCL device.
+    _pattern_size_ must be a power of two and the maximum value of
+    _pattern_size_ is the size of the largest integer or floating-point vector
+    data type supported by the OpenCL device.
     The memory associated with _pattern_ can be reused or freed after the
     function returns.
     Behavior is undefined if _pattern_ is allocated using {clSVMAlloc}.
