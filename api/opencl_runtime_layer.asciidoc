@@ -8277,10 +8277,8 @@ To enqueue a command to do a memcpy operation, call the function
 include::{generated}/api/protos/clEnqueueSVMMemcpy.txt[]
 include::{generated}/api/version-notes/clEnqueueSVMMemcpy.asciidoc[]
 
-  * _command_queue_ refers to the host command-queue in which the read / write
+  * _command_queue_ refers to the host command-queue in which the memory copy
     command will be queued.
-    If either _dst_ptr_ or _src_ptr_ is allocated using {clSVMAlloc} then the
-    OpenCL context allocated against must match that of _command_queue_.
   * _blocking_copy_ indicates if the copy operation is _blocking_ or
     _non-blocking_.
   * If _blocking_copy_ is {CL_TRUE} i.e. the copy command is blocking,
@@ -8321,9 +8319,9 @@ execution status of the read command.
 When the copy command has completed, the contents of the buffer that
 _dst_ptr_ points to can be used by the application.
 
-If the memory allocation(s) containing _dst_ptr_ and/or _src_ptr_ are
-allocated using {clSVMAlloc} and either is not allocated from the same
-context from which _command_queue_ was created the behavior is undefined.
+If either _dst_ptr_ or _src_ptr_ were allocated using {clSVMAlloc}, and either
+were allocated from a different context then the context specified when
+_command_queue_ was created, then behavior is undefined.
 
 // refError
 
