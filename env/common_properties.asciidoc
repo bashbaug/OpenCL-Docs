@@ -612,6 +612,11 @@ For the *printf* instruction in the *OpenCL.std*
 format specifiers in the _format_ operand determine how to print the
 additional argument operands.
 
+The *printf* _format_ operand must be an *OpTypePointer* with _Storage Class_
+equal to *UniformConstant* and _Type_ equal to *OpTypeArray* of *OpTypeInt* with
+_Width_ equal to 8 footnote:[This is a common SPIR-V representation for a
+compile-time string literal constant.].
+
 Behavior is undefined unless the source operand type for an additional argument
 matches the supported operand types for the format specifier in the following
 table.
@@ -720,5 +725,3 @@ the *OpenCL.std* extended instruction set for OpenCL:
 * Behavior is undefined for the *n* conversion specifier.
 * Behavior is undefined for the *l* length modifier when 64-bit integers are not
   supported.
-* Behavior is undefined for the conversion specifier *s* when the operand is not
-  a literal string.
