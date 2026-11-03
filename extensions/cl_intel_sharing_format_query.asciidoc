@@ -384,7 +384,7 @@ Otherwise, it returns one of the following errors:
 Status: `RESOLVED`
 
 Discussion: The best name appears to be cl_intel_sharing_format_query.
-Another possibility is cl_intel_interop_format_query, but it seems better to have 'sharing' in the name, since all of the API-specific sharing extensions also have 'sharing' in the name, with the exception of cl_khr_egl_image.
+Another possibility is cl_intel_interop_format_query, but it seems better to have "sharing" in the name, since all of the API-specific sharing extensions also have "sharing" in the name, with the exception of cl_khr_egl_image.
 --
 
 . Do we need to say anything about cl_intel_d3d11_nv12_media_sharing in this spec?

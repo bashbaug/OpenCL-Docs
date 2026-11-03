@@ -32,7 +32,7 @@ Rationale:
 > extension as it evolves.
 
 When an extension is complete, the corresponding HTML document should be
-published to the OpenCL Registry. The 'extensionshtml' target in
+published to the OpenCL Registry. The `extensionshtml` target in
 ../Makefile will generate individual HTML documents in ../out/html/ for
 each extension specification in this directory, as well as a document
 containing all extensions in ../out/html/extensions.html.
