@@ -41,7 +41,7 @@ Final Draft
 
 == Version
 
-Built On: {docdate} +
+Built On: 2020-03-13 +
 Revision: 1
 
 == Dependencies

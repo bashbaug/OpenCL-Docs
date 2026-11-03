@@ -51,7 +51,7 @@ Shipping
 
 == Version
 
-Built On: {docdate} +
+Built On: 2025-07-07 +
 Revision: 1.1.0
 
 == Dependencies

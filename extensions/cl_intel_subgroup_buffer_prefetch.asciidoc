@@ -39,7 +39,7 @@ Complete
 
 == Version
 
-Built On: {docdate} +
+Built On: 2024-06-28 +
 Revision: 1
 
 == Dependencies

@@ -125,7 +125,7 @@ Promoters, or any other relevant status information.
 
 == Version
 
-Built On: {docdate} +
+Built On: 2024-07-01 +
 Version: Major.Minor.Patch
 
 ****
@@ -134,6 +134,11 @@ modification date.  If/when the extension template is tracked in git,
 the version may also include a git commit ID.
 
 Write dates in https://en.wikipedia.org/wiki/ISO_8601[ISO 8601] date format.
+
+The 'Built On' date should document the last modified date for the
+extension. Do not use `{docdate}`, since it represents the date a PDF
+or HTML specification is built from the asciidoc source, not the
+date when the extension was last modified.
 ****
 
 == Dependencies
